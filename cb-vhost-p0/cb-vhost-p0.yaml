@@ -1,0 +1,94 @@
+#
+# BSD 3-Clause License
+#
+# Copyright (c) Circuit Blvd., Inc.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cb-vhost-p0
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: cb-vhost-p0
+  template:
+    metadata:
+      labels:
+        app: cb-vhost-p0
+    spec:
+      hostNetwork: true
+      hostPID: true
+      hostIPC: true
+      containers:
+      - name: cb-vhost-p0
+        image: 10.12.90.111:5000/cb-vhost-p0
+        env:
+        - name: SLEEPTIME
+          value: "15"
+        - name: RPC_IP
+          value: "localhost"
+        - name: RPC_PORT
+          value: "7777"
+        - name: START
+          value: "0"
+        - name: END
+          value: "23"
+        - name: MB
+          value: "1024"
+        - name: BLK
+          value: "4096"
+        - name: HGMEMSIZEMB
+          value: "20000"
+        - name: CPUMASK
+          value: "[0-5]"
+        volumeMounts:
+        - mountPath: /dev
+          name: dev
+        - mountPath: /var
+          name: var
+        securityContext:
+          privileged: true
+        resources:
+          requests:
+            memory: "2000Mi"
+            cpu: "6000m"
+          limits:
+            hugepages-1Gi: 40Gi
+      volumes:
+      - name: dev
+        hostPath:
+          path: /dev
+          type: Directory
+      - name: var
+        hostPath:
+          path: /var
+          type: Directory
+      nodeSelector:
+        type1: worker1

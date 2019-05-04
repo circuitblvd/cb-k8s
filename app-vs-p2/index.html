@@ -1,0 +1,62 @@
+<!--
+#
+# BSD 3-Clause License
+#
+# Copyright (c) Circuit Blvd., Inc.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Cinabro Video Server</title>
+  <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
+  <link href="dist/videojs-playlist-ui.css" rel="stylesheet">
+  <link href="/css/example2.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+</head>
+
+<body>
+  <section class="main-preview-player">
+    <video id="preview-player" class="video-js vjs-fluid" data-setup='{"controls": true, "autoplay": true, "preload": "auto", "loop": false, "aspectRatio": "24:10", "muted": true, "crossorigin": "anonymous"}'>
+      <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+    </video>
+
+    <div class="playlist-container  preview-player-dimensions vjs-fluid">
+      <ol class="vjs-playlist"></ol>
+    </div>
+  </section>
+
+  <script src="node_modules/video.js/dist/video.js"></script>
+  <script src="node_modules/videojs-playlist/dist/videojs-playlist.js"></script>
+  <script src="dist/videojs-playlist-ui.js"></script>
+  <script src="js/advanced.js"></script>
+</body>
+</html>
